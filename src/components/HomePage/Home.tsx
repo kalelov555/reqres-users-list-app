@@ -10,9 +10,10 @@ import { Spinner } from "../Spinner/Spinner";
 export type Props = {
   user: User;
   status: "idle" | "loading" | "succeeded";
+  handleLogout: () => void;
 };
 
-function Home({ user }: Props) {
+function Home({ user, handleLogout }: Props) {
   const { users, status } = useAppSelector((state) => state.users);
 
   const dispatch = useAppDispatch();
@@ -28,7 +29,7 @@ function Home({ user }: Props) {
   return (
     <div className='home'>
       <div className='nav'>
-        <Navbar currentUser={user} />
+        <Navbar currentUser={user} handleLogout={handleLogout} />
       </div>
       <div className='content'>
         <Content users={users} />

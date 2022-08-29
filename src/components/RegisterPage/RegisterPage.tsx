@@ -10,9 +10,13 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useAppDispatch } from "../../store/hooks";
-import { registerAction } from "../../store/user/actions";
-import { useNavigate } from "react-router-dom";
+
+export type Props = {
+  handleRegister: (
+    email: FormDataEntryValue | null,
+    password: FormDataEntryValue | null
+  ) => void;
+};
 
 function Copyright(props: any) {
   return (
@@ -34,17 +38,14 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 
-const RegisterPage = () => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-
+const RegisterPage = ({ handleRegister }: Props) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
     const email = data.get("email");
     const password = data.get("password");
-    dispatch(registerAction({ email, password, navigate }));
+    handleRegister(email, password);
   };
 
   return (

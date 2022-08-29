@@ -23,7 +23,7 @@ export const usersSlice = createSlice({
       })
       .addCase(getUsersListAction.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.users = action.payload;
+        if (action.payload) state.users = action.payload;
       }),
 });
 

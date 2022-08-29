@@ -9,19 +9,15 @@ import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { Divider, Link, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../store/hooks";
-import { logoutAction } from "../../store/user/actions";
 import { User } from "../../typings/user";
 
 export type Props = {
   currentUser: User;
+  handleLogout: () => void;
 };
 
-export const Navbar = ({ currentUser }: Props) => {
+export const Navbar = ({ currentUser, handleLogout }: Props) => {
   const { first_name, last_name, avatar } = currentUser;
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -99,7 +95,7 @@ export const Navbar = ({ currentUser }: Props) => {
           Settings
         </MenuItem>
         {/* Logout action */}
-        <MenuItem onClick={() => dispatch(logoutAction({ navigate }))}>
+        <MenuItem onClick={() => handleLogout()}>
           <ListItemIcon>
             <Logout fontSize='small' />
           </ListItemIcon>

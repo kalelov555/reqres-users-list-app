@@ -38,7 +38,7 @@ export const registerAction = createAsyncThunk(
 
     if (userToken) {
       Cookies.set("token", userToken);
-      navigate("/");
+      navigate("/login");
     }
 
     return {
